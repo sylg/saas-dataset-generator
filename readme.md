@@ -2,6 +2,9 @@
 
 Currently spit out 2 CSV files in `/output`, `events.csv` & `users.csv`. 
 
+`user_generator.rb` take only one argument, the number of user you want to generate. ex `ruby user_generator.rb 200`
+
+
 
 ## TODO 
 
