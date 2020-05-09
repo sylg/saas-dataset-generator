@@ -8,7 +8,7 @@ CSV_FILENAME_EVENT = "events.csv"
 
 
 class User
-    attr_reader :full_name, :first_name, :last_name, :location, :email, :user_id, :company_domain, :role, :website, :created_at, :events, :type, :last_payment_amount_in_cents
+    attr_reader :full_name, :first_name, :last_name, :location, :email, :user_id, :company, :company_domain, :role, :website, :created_at, :events, :type, :last_payment_amount_in_cents
     attr_writer :events, :type, :last_payment_amount_in_cents
 
     def initialize
@@ -20,6 +20,7 @@ class User
         @email = FFaker::Internet.disposable_email
         @role = FFaker::Job.title
         @company_domain = FFaker::Internet.domain_name
+        @company = FFaker::Company.name
         @website = FFaker::Internet.http_url
         @created_at = FFaker::Time.between('2019-05-01 16:20', '2020-01-01 16:20')
         @type = "free user"
@@ -30,7 +31,7 @@ class User
     def generate_associate_events
         events = []
         # for i in 1..rand(1..50)
-        for i in 1..rand(12..120)
+        for i in 1..rand(12..80)
             eventName = ["ProductEvent", "MarketingEvent"].sample
             e = Kernel.const_get(eventName).new(self)
             events << e
@@ -70,7 +71,7 @@ class ProductEvent < Event
     end
 
     def generate_event_name
-        ["apointment wizard started", "apointment created", "apointment shared", "apointment updated", "apointment deleted"].sample
+        ["apointment wizard started", "appointment created", "appointment shared", "appointment updated", "appointment deleted"].sample
     end
 
     def generate_event_data
